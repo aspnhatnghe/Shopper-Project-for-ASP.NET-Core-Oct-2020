@@ -8,6 +8,10 @@ namespace ShopperProject.Data
     {
         [Key]
         public int MaHh { get; set; }
+
+        [MaxLength(7)]
+        public string SKU { get; set; }
+
         [MaxLength(150)]
         public string TenHh { get; set; }
         [MaxLength(150)]
