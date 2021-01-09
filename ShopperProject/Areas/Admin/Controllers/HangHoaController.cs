@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ShopperProject.Areas.Admin.Models;
 using ShopperProject.Data;
 
 namespace ShopperProject.Areas.Admin.Controllers
@@ -11,10 +13,12 @@ namespace ShopperProject.Areas.Admin.Controllers
     public class HangHoaController : Controller
     {
         private readonly ShopperDbContext _context;
+        private readonly IMapper _mapper;
 
-        public HangHoaController(ShopperDbContext context)
+        public HangHoaController(ShopperDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -27,6 +31,25 @@ namespace ShopperProject.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(HangHoaVM model)
+        {
+            var hangHoa = _mapper.Map<HangHoa>(model);
+
+            //Xử lý cho SKU
+            var hangHoaCuoiCung = _context.HangHoas.OrderByDescending(p => p.SKU).FirstOrDefault();
+            var stt = 1;
+            if(hangHoaCuoiCung != null)
+            {
+                stt = int.Parse(hangHoaCuoiCung.SKU.Substring(2)) + 1;
+            }
+            hangHoa.SKU = "HH" + stt.ToString("00000");
+
+            _context.Add(hangHoa);
+            _context.SaveChanges();
             return View();
         }
     }

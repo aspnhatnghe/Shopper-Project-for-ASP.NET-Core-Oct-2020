@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using ShopperProject.Areas.Admin.Models;
 
 namespace ShopperProject.Data
 {
@@ -11,5 +12,7 @@ namespace ShopperProject.Data
         public ShopperDbContext(DbContextOptions options):base(options)
         {
         }
+
+        public DbSet<ShopperProject.Areas.Admin.Models.HangHoaVM> HangHoaVM { get; set; }
     }
 }
