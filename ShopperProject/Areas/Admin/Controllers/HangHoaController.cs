@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopperProject.Areas.Admin.Models;
 using ShopperProject.Data;
+using ShopperProject.Helpers;
 
 namespace ShopperProject.Areas.Admin.Controllers
 {
@@ -38,7 +40,7 @@ namespace ShopperProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(HangHoaVM model)
+        public IActionResult Create(HangHoaVM model, IFormFile Hinh)
         {
             if (!ModelState.IsValid)
             {
@@ -49,6 +51,8 @@ namespace ShopperProject.Areas.Admin.Controllers
             try
             {
                 var hangHoa = _mapper.Map<HangHoa>(model);
+
+                hangHoa.Hinh = MyTool.UploadImage(Hinh, "wwwroot", "Hinh", "HangHoa");
 
                 //Xử lý cho SKU
                 var hangHoaCuoiCung = _context.HangHoas.OrderByDescending(p => p.SKU).FirstOrDefault();
