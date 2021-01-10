@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ShopperProject.Areas.Admin.Models;
 using ShopperProject.Data;
 
@@ -31,6 +32,7 @@ namespace ShopperProject.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Loai = new SelectList(_context.Loais, "MaLoai", "TenLoai");
             return View();
         }
 
@@ -39,6 +41,7 @@ namespace ShopperProject.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.Loai = new SelectList(_context.Loais, "MaLoai", "TenLoai");
                 return View();
             }
 
@@ -62,6 +65,7 @@ namespace ShopperProject.Areas.Admin.Controllers
             }
             catch
             {
+                ViewBag.Loai = new SelectList(_context.Loais, "MaLoai", "TenLoai");
                 return View();
             }
         }
