@@ -74,5 +74,52 @@ namespace ShopperProject.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        #region Edit HangHoa
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var hangHoa = _context.HangHoas.SingleOrDefault(hh => hh.MaHh == id);
+            if (hangHoa != null)
+            {
+                ViewBag.Loai = new SelectList(_context.Loais, "MaLoai", "TenLoai", hangHoa.MaLoai);
+                return View(hangHoa);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(HangHoa hangHoa, IFormFile HinhEdit)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Loai = new SelectList(_context.Loais, "MaLoai", "TenLoai", hangHoa.MaLoai);
+                return View();
+            }
+
+            if (HinhEdit != null)
+            {
+                var hinhFileName = MyTool.UploadImage(HinhEdit, "wwwroot", "Hinh", "HangHoa");
+                if(!string.IsNullOrEmpty(hinhFileName))
+                {
+                    hangHoa.Hinh = hinhFileName;
+                }
+            }
+
+            try
+            {
+                _context.Update(hangHoa);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch {
+                ViewBag.Loai = new SelectList(_context.Loais, "MaLoai", "TenLoai", hangHoa.MaLoai);
+                return View();
+            }
+        }
+        #endregion
     }
 }
