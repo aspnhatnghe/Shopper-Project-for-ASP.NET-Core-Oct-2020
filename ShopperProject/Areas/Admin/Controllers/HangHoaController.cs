@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ShopperProject.Areas.Admin.Models;
 using ShopperProject.Data;
 
@@ -24,7 +25,7 @@ namespace ShopperProject.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var data = _context.HangHoas;
+            var data = _context.HangHoas.Include(hh => hh.Loai);
 
             return View(data);
         }
