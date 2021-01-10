@@ -37,20 +37,33 @@ namespace ShopperProject.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(HangHoaVM model)
         {
-            var hangHoa = _mapper.Map<HangHoa>(model);
-
-            //Xử lý cho SKU
-            var hangHoaCuoiCung = _context.HangHoas.OrderByDescending(p => p.SKU).FirstOrDefault();
-            var stt = 1;
-            if(hangHoaCuoiCung != null)
+            if (!ModelState.IsValid)
             {
-                stt = int.Parse(hangHoaCuoiCung.SKU.Substring(2)) + 1;
+                return View();
             }
-            hangHoa.SKU = "HH" + stt.ToString("00000");
 
-            _context.Add(hangHoa);
-            _context.SaveChanges();
-            return View();
+            try
+            {
+                var hangHoa = _mapper.Map<HangHoa>(model);
+
+                //Xử lý cho SKU
+                var hangHoaCuoiCung = _context.HangHoas.OrderByDescending(p => p.SKU).FirstOrDefault();
+                var stt = 1;
+                if (hangHoaCuoiCung != null)
+                {
+                    stt = int.Parse(hangHoaCuoiCung.SKU.Substring(2)) + 1;
+                }
+                hangHoa.SKU = "HH" + stt.ToString("00000");
+
+                _context.Add(hangHoa);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

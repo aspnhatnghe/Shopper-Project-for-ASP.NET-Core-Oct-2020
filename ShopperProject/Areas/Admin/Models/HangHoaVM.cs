@@ -15,15 +15,19 @@ namespace ShopperProject.Areas.Admin.Models
         [Required]
         [Display(Name = "Tên hàng hóa")]
         public string TenHh { get; set; }
+
         [MaxLength(150)]
         [Display(Name = "Hình")]
         public string Hinh { get; set; }
+
         [KiemTraLonHonKhong]
         [Display(Name = "Đơn giá")]
         public double DonGia { get; set; }
-        [KiemTraLonHonKhong]
+
+        [Range(0, int.MaxValue)]
         [Display(Name = "Số lượng tồn")]
         public int SoLuongTon { get; set; }
+
         public byte? GiamGia { get; set; }
         [DataType(DataType.MultilineText)]
         [Display(Name = "Mô tả")]
