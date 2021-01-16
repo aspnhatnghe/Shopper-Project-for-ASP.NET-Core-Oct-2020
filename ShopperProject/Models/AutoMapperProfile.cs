@@ -11,6 +11,11 @@ namespace ShopperProject.Models
         {
             //định nghĩa phần map
             CreateMap<HangHoaVM, HangHoa>().ReverseMap();
+
+            CreateMap<HangHoa, HangHoaViewModel>()
+                .ForMember(dest => dest.GiamGia,
+                opt => opt.MapFrom(source =>    source.GiamGia.HasValue ? source.GiamGia.Value : 0)
+                );
         }
     }
 }
