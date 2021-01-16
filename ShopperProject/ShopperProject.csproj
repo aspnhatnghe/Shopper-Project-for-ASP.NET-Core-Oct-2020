@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20210116095410_Add_GiaBan_HangHoa.cs" />
+    <Compile Remove="Migrations\20210116095410_Add_GiaBan_HangHoa.Designer.cs" />
+    <Compile Remove="Migrations\20210116095646_Add_GiaBan_HangHoa.cs" />
+    <Compile Remove="Migrations\20210116095646_Add_GiaBan_HangHoa.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\js\site.js" />
   </ItemGroup>
 

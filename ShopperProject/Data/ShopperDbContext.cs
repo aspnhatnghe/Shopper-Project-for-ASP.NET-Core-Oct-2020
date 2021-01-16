@@ -12,7 +12,5 @@ namespace ShopperProject.Data
         public ShopperDbContext(DbContextOptions options):base(options)
         {
         }
-
-        public DbSet<ShopperProject.Areas.Admin.Models.HangHoaVM> HangHoaVM { get; set; }
     }
 }
