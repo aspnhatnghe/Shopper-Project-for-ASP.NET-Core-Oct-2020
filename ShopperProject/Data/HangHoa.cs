@@ -24,6 +24,6 @@ namespace ShopperProject.Data
         [ForeignKey("MaLoai")]
         public Loai Loai { get; set; }
 
-        public double GiaBan => DonGia * (100 - GiamGia.Value) / 100.0;
+        public double GiaBan => DonGia * (100 - (GiamGia.HasValue ? GiamGia.Value : 0)) / 100.0;
     }
 }

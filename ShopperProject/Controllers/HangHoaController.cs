@@ -22,9 +22,14 @@ namespace ShopperProject.Controllers
             SoSanPhamMoiTrang = int.Parse(configuration["AppSettings:MaxItemCount"].ToString());
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(int? loai, int page = 1)
         {
-            var data = _context.HangHoas;
+            var data = _context.HangHoas.AsQueryable();
+
+            if(loai.HasValue)
+            {
+                data = data.Where(hh => hh.MaLoai == loai);
+            }
 
             PagedList<HangHoa> model = new PagedList<HangHoa>(data, page, SoSanPhamMoiTrang);
 

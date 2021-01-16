@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopperProject.Data;
 
 namespace ShopperProject.Migrations
 {
     [DbContext(typeof(ShopperDbContext))]
-    partial class ShopperDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210116103119_Add_User_Role")]
+    partial class Add_User_Role
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
