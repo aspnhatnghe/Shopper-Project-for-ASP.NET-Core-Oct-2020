@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ShopperProject.Controllers
 {
@@ -102,6 +103,19 @@ namespace ShopperProject.Controllers
                 return Redirect(ReturnUrl);
             }
             return RedirectToAction("Profile");
+        }
+
+
+        [Authorize(Roles = "Khách hàng, Quản trị")]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Quản trị")]
+        public IActionResult ThongKe()
+        {
+            return View();
         }
     }
 }
