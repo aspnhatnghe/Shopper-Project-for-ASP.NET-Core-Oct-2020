@@ -47,7 +47,7 @@ namespace ShopperProject.Helpers
 
         public static string ToVnd(this double giaTri)
         {
-            return $"{giaTri:#,##0.00} đ";
+            return $"{giaTri:#,##0} đ";
         }
 
         public static void Set<T>(this ISession session, string key, T value)
