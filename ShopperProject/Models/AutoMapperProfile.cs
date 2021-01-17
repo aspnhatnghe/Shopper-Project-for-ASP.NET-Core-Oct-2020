@@ -16,6 +16,8 @@ namespace ShopperProject.Models
                 .ForMember(dest => dest.GiamGia,
                 opt => opt.MapFrom(source =>    source.GiamGia.HasValue ? source.GiamGia.Value : 0)
                 );
+
+            CreateMap<RegisterUser, User>();
         }
     }
 }

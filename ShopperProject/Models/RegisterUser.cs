@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ShopperProject.Models
 {
-    public class RegisteUser
+    public class RegisterUser
     {
         [MaxLength(100)]
         [Required]
